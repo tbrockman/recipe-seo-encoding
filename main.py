@@ -548,12 +548,12 @@ Examples:
     elif args.mode == "decode":
         if args.stego_file:
             with open(args.stego_file) as f:
-                stego_text = f.read().strip()
+                stego_text = f.read()
         elif args.stego_text:
             stego_text = args.stego_text
         else:
             print("Paste stego text (Ctrl-D when done):")
-            stego_text = sys.stdin.read().strip()
+            stego_text = sys.stdin.read()
 
         print(f"Stego text: {len(stego_text)} chars")
         print(f"Prompt: {args.prompt!r}")

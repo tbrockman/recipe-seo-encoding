@@ -1,17 +1,17 @@
 # recipe-seo-encoding
 
 > [!WARNING]
-> This project is **entirely vibe-coded** and the author is a _dumb-dumb_ who thought the idea was funny
+> This project is **entirely vibe-coded** <sup>(likely partially plagiarized from [this repository](https://github.com/artkpv/arithmetic-coding-steganography))</sup> and the author is a _dumb-dumb_ who just thought the idea was funny
 
 Use SEO-gaming recipe preambles as a vehicle for encoding secret messages (the prompt can really be anything though, the shared prompt is simply a key that both encoder and decoder agree on).
 
-Hides secret messages in natural-looking text using arithmetic steganography over a language model's token distributions. The generated text is statistically close to normal model output — each token was a plausible next token in context.
+Hides secret messages in natural-looking text using [neural linguistic steganography](https://aclanthology.org/D19-1115/) over a language model's token distributions.
 
 ## How it works
 
 1. The encoder takes your secret message and a shared prompt.
 2. At each generation step, it builds a probability distribution (CDF) over the model's top-k tokens.
-3. [Arithmetic coding](https://en.wikipedia.org/wiki/Arithmetic_coding) maps secret message bits onto token selections — each chosen token is both a plausible continuation *and* an encoding of hidden data.
+3. [Arithmetic coding](https://www.artkpv.net/Tool-Arithmetic-Coding-for-LLM-Steganography/) maps secret message bits onto token selections — each chosen token is both a plausible continuation *and* an encoding of hidden data.
 4. The decoder, given the same model and prompt, reconstructs the identical CDF at each step and recovers the secret bits from the token choices.
 
 Both sides must use the **exact same model, quantization, top-k value, and prompt**. Any difference causes decoding failure.
